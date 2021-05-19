@@ -4,8 +4,8 @@ Collection of the entire scripts,notes,tools including important tips that helps
 Swiss Army Knife. These scripts includes custom made,inspired commands from online etc.
 
 # Commands
-Basic Linux Commands
-Installation pg13 Steps
+1.Basic Linux Commands
+2.Installation pg13 Steps
 Quick Shortcut commands
 Processlist 
 Connections

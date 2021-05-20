@@ -59,7 +59,7 @@ AND state_change < current_timestamp - INTERVAL '1' MINUTE ;
 #!/bin/sh
 exec 3>&1 4>&2
 exec 1>log.out 2>&1
-export PGPASSWORD='tK!2yG-d'
+export PGPASSWORD='PASS'
 lockcount=$(psql -U postgres -d DBNAME -tA -c 'select count(*) from pg_locks;')
 if [ "$lockcount" -gt "100" ];
 then

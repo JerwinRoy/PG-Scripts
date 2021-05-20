@@ -12,21 +12,20 @@ rpm -qa | grep post
 systemctl start postgresql-13
 systemctl status postgresql-13
 
-
 ---CHECK DB
 su postgres
 psql
 alter user postgres with password 'new_pass';
 
 --CHECK
-postgres=# show data_directory;
+show data_directory;
      data_directory     
 ------------------------
  /var/lib/pgsql/13/data
 (1 row)
 
 
----CHANGE DATA DIR 
+---CHANGE DATA DIR TO CUSTOM LOCATION
 systemctl stop postgresql-13
 systemctl status postgresql-13
 
@@ -153,7 +152,6 @@ systemctl status postgresql-13
 
 psql -U postgres
 
-
 --Dump restore 
 pg_dump -U postgres DB_NAME > DB_NAME.sql
 pg_dumpall -U postgres -r > ROLES_DB.out
@@ -167,7 +165,7 @@ psql -U postgres DB_NAME_NEW -f DB_NAME.sql
 -- CREATE AN APP USER 
 CREATE USER APP_USER WITH PASSWORD 'PASS';
 
--- GRANT ALL PERMISSIONS
+-- GRANT ALL PERMISSIONS TO APP_USER
 GRANT USAGE ON SCHEMA public TO APP_USER ;
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO APP_USER;
 GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO APP_USER;

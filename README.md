@@ -14,7 +14,7 @@ Swiss Army Knife. These scripts includes custom made and inspired commands. Enjo
 * Indexes
 * Replication
 * Data extract csv, json 
-* Bloat & pg_repack
+* Bloat 
 * pg_pool
 * Backup & Restore
 * Scale up/Scale down an instance

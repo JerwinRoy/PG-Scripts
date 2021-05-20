@@ -17,7 +17,6 @@ Swiss Army Knife. These scripts includes custom made and inspired commands. Enjo
 * Bloat 
 * pg_pool
 * Backup & Restore
-* Scale up/Scale down an instance
 
 ## Fav Tools 
 

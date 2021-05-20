@@ -30,3 +30,16 @@ ALTER DEFAULT PRIVILEGES
 FOR USER username
 IN SCHEMA schema_name
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO username;
+
+-- Create a READ USER
+CREATE DATABASE db_name;
+CREATE USER read_user WITH PASSWORD 'pass';
+GRANT ALL PRIVILEGES ON DATABASE "db_name" to read_user;
+ALTER DATABASE db_name OWNER TO read_user;
+
+-- Create a READ_WRITE USER
+CREATE DATABASE db_name;
+CREATE USER read_write_user WITH PASSWORD 'pass';
+\c db_name
+GRANT SELECT,INSERT,UPDATE ON ALL TABLES IN SCHEMA public TO read_write_user;
+GRANT ALL PRIVILEGES ON DATABASE "db_name" to read_write_user;

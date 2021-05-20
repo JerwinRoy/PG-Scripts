@@ -1,4 +1,4 @@
--RUN ON NEW VM
+-- RUN ON NEW VM
 yum install centos-release-scl
 
 --PG INSTALLATION 
@@ -16,7 +16,9 @@ systemctl status postgresql-13
 ---CHECK DB
 su postgres
 psql
-alter user postgres with password 'tK!2yG-d';
+alter user postgres with password 'new_pass';
+
+--CHECK
 postgres=# show data_directory;
      data_directory     
 ------------------------
@@ -28,9 +30,9 @@ postgres=# show data_directory;
 systemctl stop postgresql-13
 systemctl status postgresql-13
 
- mkdir -p /db/13/data
- chown -R postgres:postgres /db
- systemctl edit postgresql-13.service
+mkdir -p /db/13/data
+chown -R postgres:postgres /db
+systemctl edit postgresql-13.service
 
  [Service]
 Environment=PGDATA=/db/13/data
@@ -91,7 +93,7 @@ systemctl status postgresql-13
 # that starts with a dot (.) matches a suffix of the actual host name.
 # Alternatively, you can write an IP address and netmask in separate
 # columns to specify the set of hosts.  Instead of a CIDR-address, you
-# can write "samehost" to match any of the server's own IP addresses,
+# can write "samehost" to match any of the servers own IP addresses,
 # or "samenet" to match any address in any subnet that the server is
 # directly connected to.
 #
@@ -153,42 +155,34 @@ psql -U postgres
 
 
 --Dump restore 
-pg_dump -U postgres x_region > x_region.sql
-pg_dumpall -U postgres -r > roles_x_region.out
+pg_dump -U postgres DB_NAME > DB_NAME.sql
+pg_dumpall -U postgres -r > ROLES_DB.out
 
-create database x_region;
+create database DB_NAME_NEW;
 
-psql -d postgres -U postgres -f roles_x_region.out
-psql -U postgres x_region -f x_region.sql
-
-
-
---CREATE USER 
-CREATE USER prod_readonly WITH PASSWORD 'u$er_rEad0nly';
-GRANT USAGE ON SCHEMA public TO prod_readonly ;
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO prod_readonly;
-GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO prod_readonly;
+psql -d postgres -U postgres -f ROLES_DB.out
+psql -U postgres DB_NAME_NEW -f DB_NAME.sql
 
 
----APP USER
+-- CREATE AN APP USER 
+CREATE USER APP_USER WITH PASSWORD 'PASS';
 
-ALTER DATABASE x_region OWNER TO regionuser;
+-- GRANT ALL PERMISSIONS
+GRANT USAGE ON SCHEMA public TO APP_USER ;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO APP_USER;
+GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO APP_USER;
+GRANT ALL PRIVILEGES ON DATABASE "DB_NAME" to APP_USER;
 
+---CHANGE APP USER DB PERMISSION
+ALTER DATABASE DB_NAME OWNER TO APP_USER;
 
-CREATE USER condpay_user WITH PASSWORD '946T78547';
-ALTER USER regionuser WITH PASSWORD '63G104TYX567';
+-- CRAETE READ USER
+CREATE USER READ_USER WITH PASSWORD 'READ';
 
+-- ALTER USER PASSWORD
+ALTER USER WRITE_USER WITH PASSWORD 'WRITE';
 
-
-GRANT USAGE ON SCHEMA public TO condpay_user ;
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO condpay_user;
-GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO condpay_user;
-GRANT ALL PRIVILEGES ON DATABASE "conditional_payment" to condpay_user;
-
-ALTER DATABASE x_calendar OWNER TO calendar;
-
-
-
-SELECT 'ALTER TABLE '|| schemaname || '.' || tablename ||' OWNER TO regionuser;'
-FROM pg_tables WHERE NOT schemaname IN ('pg_catalog', 'information_schema')
+--  SCRIPT TO ALTER ALL TABLES USER
+SELECT 'ALTER TABLE '|| schemaname || '.' || tablename ||' OWNER TO USER_NAME;'
+FROM pg_tables WHERE NOT schemaname IN ('DB_NAME', 'information_schema')
 ORDER BY schemaname, tablename;

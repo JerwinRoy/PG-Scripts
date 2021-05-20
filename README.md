@@ -5,23 +5,23 @@ Collection of the entire scripts,notes,tools including important tips that helps
 Swiss Army Knife. These scripts includes custom made and inspired commands. Enjoy !!!
 
 ## Commands
-* Basic Linux Commands \
-* Installation pg13 Steps \
-* Quick Shortcut commands \
-* Processlist \
+* Basic Linux Commands 
+* Installation pg13 Steps 
+* Quick Shortcut commands 
+* Processlist 
 * Connections\
-* Users Creation & Permissions\
-* Deadlock\
-* Indexes\
+* Users Creation & Permissions
+* Deadlock
+* Indexes
 * Replication\
-* Data extract csv, json \
-* Bloat & pg_repack\
-* pg_pool\
-* Backup & Restore\
-* Failover\
-* Reconfigure new slave\
+* Data extract csv, json 
+* Bloat & pg_repack
+* pg_pool
+* Backup & Restore
+* Failover
+* Reconfigure new slave
 * Scale up/Scale down an instance\
-* Mount,unmount any partition\
+* Mount,unmount any partition
 
 ## Fav Tools 
 

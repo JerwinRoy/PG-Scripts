@@ -24,15 +24,6 @@ Swiss Army Knife. These scripts includes custom made and inspired commands. Enjo
 * Scale up/Scale down an instance\
 * Mount,unmount any partition\
 
-## Notes 
-* Installation checklist 
-* Important Parameters
-* Architecture
-* PostgreSQL 
-* Replication
-* Partitions
-* Alert Monitoring
-
 ## Fav Tools 
 
 ## Fav Extensions 

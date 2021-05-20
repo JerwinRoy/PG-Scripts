@@ -24,3 +24,12 @@ psql -U user -d postgres -h pgpool_host
 
 -- CHECK NODES STATUS AFTER LOGGINH IN 
 show pool_nodes;
+
+---ERROR LOG
+it will be there /var/log/pgpool/pgpool.log
+
+---CREATE A PASSWORD ON PGPOOL
+pg_md5 -m -f /etc/pgpool-II/pgpool.conf -u user -p
+
+cat pool_passwd 
+encrypted

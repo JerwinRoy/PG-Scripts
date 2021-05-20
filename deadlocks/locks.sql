@@ -55,6 +55,18 @@ SELECT pg_cancel_backend(pid) FROM pg_stat_activity WHERE  pid <> pg_backend_pid
  and datname='DB_NAME' and usename='USER_NAME'
 AND state_change < current_timestamp - INTERVAL '1' MINUTE ;
 
+-- SHELL SCRIPT ON BASH TO CLEAR LOCKS
+#!/bin/sh
+exec 3>&1 4>&2
+exec 1>log.out 2>&1
+export PGPASSWORD='tK!2yG-d'
+lockcount=$(psql -U postgres -d DBNAME -tA -c 'select count(*) from pg_locks;')
+if [ "$lockcount" -gt "100" ];
+then
+ psql -U postgres -d DBNAME -c "SELECT pg_cancel_backend(pid) FROM pg_stat_activity WHERE  pid <> pg_backend_pid() and datname='DBNAME' and usename='USER' AND state_change < current_timestamp - INTERVAL '5' MINUTE ;"
+else
+ exit
+
 -- CHECK A PARTICULAR PID 
 select pid as PROCESS_ID, 
          usename as USER, 

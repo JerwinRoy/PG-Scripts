@@ -180,7 +180,3 @@ CREATE USER READ_USER WITH PASSWORD 'READ';
 -- ALTER USER PASSWORD
 ALTER USER WRITE_USER WITH PASSWORD 'WRITE';
 
---  SCRIPT TO ALTER ALL TABLES USER
-SELECT 'ALTER TABLE '|| schemaname || '.' || tablename ||' OWNER TO USER_NAME;'
-FROM pg_tables WHERE NOT schemaname IN ('DB_NAME', 'information_schema')
-ORDER BY schemaname, tablename;

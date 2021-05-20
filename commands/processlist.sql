@@ -29,3 +29,26 @@ where name='max_connections') as b;
 
 select count(*),client_addr as HOST,state as STATE,usename as USER 
 from pg_stat_activity group by state,usename,client_addr;
+
+-- CHECK A PARTICULAR PID 
+select pid as PROCESS_ID, 
+         usename as USER, 
+         datname as DATABASE, 
+         query,
+         state
+from pg_stat_activity where pid='1234';
+
+-- KILL A QUERY
+SELECT pg_cancel_backend(PID);
+
+-- GET DISTINCT IP/HOST LIST 
+select DISTINCT client_addr as HOST from pg_stat_activity ;
+
+-- SLOW QUERY
+SELECT pid, AGE(clock_timestamp(), query_start) as DURATION, usename as USER, query 
+FROM pg_stat_activity 
+WHERE query != '<IDLE>' AND query NOT ILIKE '%pg_stat_activity%' 
+ORDER BY query_start desc;
+
+
+

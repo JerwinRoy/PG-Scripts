@@ -64,4 +64,4 @@ select pid as PROCESS_ID,
 from pg_stat_activity where pid='1234';
 
 -- KILL A QUERY
-SELECT pg_cancel_backend(PID);
+SELECT pg_cancel_backend(1234);

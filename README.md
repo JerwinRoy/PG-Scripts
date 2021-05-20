@@ -9,18 +9,18 @@ Swiss Army Knife. These scripts includes custom made and inspired commands. Enjo
 * Installation pg13 Steps 
 * Quick Shortcut commands 
 * Processlist 
-* Connections\
+* Connections
 * Users Creation & Permissions
 * Deadlock
 * Indexes
-* Replication\
+* Replication
 * Data extract csv, json 
 * Bloat & pg_repack
 * pg_pool
 * Backup & Restore
 * Failover
 * Reconfigure new slave
-* Scale up/Scale down an instance\
+* Scale up/Scale down an instance
 * Mount,unmount any partition
 
 ## Fav Tools 

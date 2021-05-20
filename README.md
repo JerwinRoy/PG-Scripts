@@ -1,5 +1,4 @@
 # PostgreSQL - Swiss Army Knife :knife:
-IMAGE HERE
 
 ## Introduction
 Collection of the entire scripts,notes,tools including important tips that helps to make PostgreSQL Database administration easier. In short as the title says a 

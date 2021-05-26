@@ -4,8 +4,7 @@
 # List all the blocked transactions
 LOGFILE=/var/log/postgresql/block_query.log
 
-
-PG_PATH=/usr/pgsql-13/bin
+PSQL=/usr/pgsql-13/bin/psql
 PG_HOST=localhost
 PG_USER=jerwin
 PG_DATABASE=postgres
@@ -49,7 +48,7 @@ JOIN pg_catalog.pg_stat_activity AS blocking_activity
     ON blocking_activity.pid = blocking_locks.pid
 WHERE NOT blocked_locks.granted;"
 
-$PSQL -q -t -c "${BLOCK_QUERY}"
+$PSQL --no-psqlrc -q -t -A -c "${BLOCK_QUERY}"
 exit 0
 
 

@@ -1,4 +1,4 @@
-# PostgreSQL - Scripts  :gear::open_file_folder:
+# PostgreSQL - Scripts  :briefcase::gear:
 
 ## Introduction
 Collection of the entire scripts,notes,tools including important tips that helps to make PostgreSQL Database administration easier. In short as the title says a 
